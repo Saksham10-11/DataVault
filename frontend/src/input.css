@@ -1,0 +1,16 @@
+/* npx tailwindcss -i ./src/input.css -o ./src/output.css --watch */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nestable ol,
+.nestable ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.nestable-item {
+  padding-bottom: 20px;
+}
