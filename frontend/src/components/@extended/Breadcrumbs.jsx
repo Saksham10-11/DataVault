@@ -1,19 +1,30 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
 // material-ui
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
+import Button from '@mui/material/Button';
 
 // project import
 import MainCard from 'components/MainCard';
+
+// reducers
+import { updateData } from 'app/slices/FormSlice';
 
 export default function Breadcrumbs({ navigation, title, ...others }) {
   const location = useLocation();
   const [main, setMain] = useState();
   const [item, setItem] = useState();
+  const data = useSelector((state) => state.form.data);
+  const [isDataEmpty, setIsDataEmpty] = useState(data.length === 0);
+
+  useEffect(() => {
+    setIsDataEmpty(data.length === 0);
+  }, [data]);
 
   // set active item state
   const getCollapse = (menu) => {
@@ -31,6 +42,11 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
       });
     }
   };
+
+  // Handle Button clicks
+  const handleSave = () => {};
+
+  const handleGenerate = () => {};
 
   useEffect(() => {
     navigation?.items?.map((menu) => {
@@ -69,6 +85,18 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
       </Typography>
     );
 
+    const SaveButton = () => (
+      <Button variant="contained" color="primary" onClick={handleSave}>
+        Save
+      </Button>
+    );
+
+    const GenerateButton = () => (
+      <Button variant="contained" color="primary" onClick={handleGenerate}>
+        Generate using AI
+      </Button>
+    );
+
     // main
     if (item.breadcrumbs !== false) {
       breadcrumbContent = (
@@ -84,8 +112,9 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
               </MuiBreadcrumbs>
             </Grid>
             {title && (
-              <Grid item sx={{ mt: 2 }}>
+              <Grid item sx={{ mt: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '91%' }}>
                 <Typography variant="h5">{item.title}</Typography>
+                {item.title === 'Form Builder' && (!isDataEmpty ? <SaveButton /> : <GenerateButton />)}
               </Grid>
             )}
           </Grid>

@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import { v4 as uuid } from 'uuid';
 import Nestable from 'react-nestable';
 import { useSelector, useDispatch } from 'react-redux';
 //Material UI Components
@@ -23,7 +22,6 @@ import {
 import {
   setTitle,
   setDescription,
-  setFormData,
   addElement,
   deleteElement,
   duplicateElement as duplicateElementAction,
@@ -38,44 +36,12 @@ import {
   deleteOption as deleteOptionAction
 } from 'app/slices/FormSlice';
 
-const formEl = [
-  {
-    label: 'Text',
-    value: 'text'
-  },
-  {
-    label: 'TextArea',
-    value: 'textarea'
-  },
-  {
-    label: 'Number',
-    value: 'number'
-  },
-  {
-    label: 'Radio',
-    value: 'radio'
-  },
-  {
-    label: 'CheckBox',
-    value: 'checkBox'
-  },
-  {
-    label: 'Date',
-    value: 'date'
-  },
-  {
-    label: 'Time',
-    value: 'time'
-  }
-];
-
 const FormBuilder = () => {
   const dispatch = useDispatch();
 
   const title = useSelector((state) => state.form.title);
   const description = useSelector((state) => state.form.description);
   const data = useSelector((state) => state.form.data);
-  const formData = useSelector((state) => state.form.formData);
 
   const items = data;
 
@@ -91,7 +57,6 @@ const FormBuilder = () => {
 
   // Function to duplicate element
   const duplicateElement = (elId, elType) => {
-    console.log('called');
     dispatch(duplicateElementAction({ elId, elType }));
   };
 

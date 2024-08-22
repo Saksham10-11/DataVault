@@ -21,6 +21,9 @@ const formSlice = createSlice({
     setFormData: (state, action) => {
       state.formData = action.payload;
     },
+    updateData: (state, action) => {
+      state.data = action.payload;
+    },
     addElement: (state) => {
       const newElement = {
         id: uuid(),
@@ -135,7 +138,8 @@ export const {
   handleDate,
   handleTime,
   handleOptionValues,
-  deleteOption
+  deleteOption,
+  updateData
 } = formSlice.actions;
 
 export default formSlice.reducer;
