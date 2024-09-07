@@ -119,7 +119,7 @@ const DateInput = ({ item, handleValue, deleteEl, handleRequired, handleElType, 
           <FormControlLabel
             control={<Switch checked={item.required} onChange={() => handleRequired(item.id)} name="required-field" color="secondary" />}
             label="Required"
-            sx={{ ml: 2, color: 'blue' }}
+            sx={{ ml: 2 }}
           />
         </FormGroup>
       </Paper>

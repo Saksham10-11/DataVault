@@ -105,7 +105,6 @@ const TextArea = ({ item, handleValue, deleteEl, handleRequired, handleElType, d
               <FileCopyIcon color="secondary" />
             </IconButton>
           </Tooltip>
-
           <FormControlLabel
             control={<Switch checked={item.required} onChange={() => handleRequired(item.id)} name="required-field" color="secondary" />}
             label="Required"

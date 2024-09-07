@@ -43,8 +43,6 @@ const FormBuilder = () => {
   const description = useSelector((state) => state.form.description);
   const data = useSelector((state) => state.form.data);
 
-  const items = data;
-
   // Function to add new element
   const addNewElement = () => {
     dispatch(addElement());
@@ -208,7 +206,7 @@ const FormBuilder = () => {
             description={description}
             setDescription={(newDescription) => dispatch(setDescription(newDescription))}
           />
-          <Nestable items={items} renderItem={renderElements} maxDepth={1} onChange={handleOnChangeSort} />
+          <Nestable items={data} renderItem={renderElements} maxDepth={1} onChange={handleOnChangeSort} />
         </Grid>
         <Grid item sm={1}>
           <Tooltip title="Add Element" aria-label="add-element">

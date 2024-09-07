@@ -6,3 +6,4 @@ export { default as DateInput } from './DateInput.jsx';
 export { default as TimeInput } from './TimeInput.jsx';
 export { default as Header } from './Header.jsx';
 export { default as CheckBoxInput } from './CheckBoxInput.jsx';
+export { default as PromptDialog } from './PromptDialog.jsx';

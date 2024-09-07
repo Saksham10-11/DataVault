@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
 // material-ui
@@ -11,9 +11,13 @@ import Button from '@mui/material/Button';
 
 // project import
 import MainCard from 'components/MainCard';
+import { PromptDialog } from 'components/FormBuilder';
 
 // reducers
-import { updateData } from 'app/slices/FormSlice';
+import { updateData, setDescription, setTitle } from 'app/slices/FormSlice';
+
+//API's
+import { GenerateJSON } from 'api/FormBuilder';
 
 export default function Breadcrumbs({ navigation, title, ...others }) {
   const location = useLocation();
@@ -43,10 +47,37 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
     }
   };
 
+  // State variables for dialog
+  const [open, setOpen] = useState(false);
+  const [prompt, setPrompt] = useState('');
+  const [submit, setSubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
   // Handle Button clicks
   const handleSave = () => {};
 
-  const handleGenerate = () => {};
+  const handleGenerate = () => {
+    setOpen(true);
+  };
+
+  useEffect(() => {
+    const generateFormJSON = async () => {
+      if (submit) {
+        setPrompt('Please wait while your form is being generated ...');
+        setLoading(true);
+        const FormJSON = await GenerateJSON(prompt);
+        dispatch(updateData(FormJSON.data));
+        dispatch(setTitle(FormJSON.title));
+        dispatch(setDescription(FormJSON.description));
+        setPrompt('');
+        setLoading(false);
+        setOpen(false);
+        setSubmit(false);
+      }
+    };
+    generateFormJSON();
+  }, [submit]);
 
   useEffect(() => {
     navigation?.items?.map((menu) => {
@@ -101,6 +132,14 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
     if (item.breadcrumbs !== false) {
       breadcrumbContent = (
         <MainCard border={false} sx={{ mb: 3, bgcolor: 'transparent' }} {...others} content={false}>
+          <PromptDialog
+            open={open}
+            setOpen={setOpen}
+            prompt={prompt}
+            setPrompt={setPrompt}
+            setSubmit={setSubmit}
+            loading={loading}
+          ></PromptDialog>
           <Grid container direction="column" justifyContent="flex-start" alignItems="flex-start" spacing={1}>
             <Grid item>
               <MuiBreadcrumbs aria-label="breadcrumb">
@@ -122,7 +161,6 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
       );
     }
   }
-
   return breadcrumbContent;
 }
 
