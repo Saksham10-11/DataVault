@@ -8,16 +8,53 @@ generator client {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  userId Int    @unique
-  name  String
-  email String  @unique
+  id     String @id @default(uuid())
+  userId String @unique
+  name   String
+  email  String @unique
+  form   Form[]
+  formresponse FormResponse[]
 }
 
-model Form{
-  id Int @id @default(autoincrement())
-  formId Int @unique
-  data Json 
-  createdBy String
-  createdAt DateTime
+model Form {
+  id          String         @id @default(uuid())
+  title       String
+  description String?
+  createdAt   DateTime       @default(now())
+  user        User           @relation(fields: [createdBy], references: [userId])
+  createdBy   String
+  fields      FormField[]
+  responses   FormResponse[]
+}
+
+model FormField {
+  id        String          @id @default(uuid())
+  form      Form            @relation(fields: [formId], references: [id])
+  formId    String
+  fieldName String
+  fieldType String
+  required  Boolean
+  options   Json?
+  createdAt DateTime        @default(now())
+  responses ResponseValue[]
+}
+
+model FormResponse {
+  id             String          @id @default(uuid())
+  form           Form            @relation(fields: [formId], references: [id])
+  formId         String
+  submittedAt    DateTime        @default(now())
+  user        User           @relation(fields: [submittedBy], references: [userId])
+  submittedBy   String
+  responseValues ResponseValue[]
+}
+
+model ResponseValue {
+  id             String       @id @default(uuid())
+  formResponse   FormResponse @relation(fields: [formResponseId], references: [id])
+  formResponseId String
+  formField      FormField    @relation(fields: [formFieldId], references: [id])
+  formFieldId    String
+  value          String
+  createdAt      DateTime     @default(now())
 }
