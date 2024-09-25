@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import registerUser from 'api/Authentication/registerUser.js';
 
 // material-ui
 import Button from '@mui/material/Button';
@@ -30,6 +31,7 @@ import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
 // ============================|| JWT - REGISTER ||============================ //
 
 export default function AuthRegister() {
+  const navigate = useNavigate();
   const [level, setLevel] = useState();
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -43,6 +45,23 @@ export default function AuthRegister() {
   const changePassword = (value) => {
     const temp = strengthIndicator(value);
     setLevel(strengthColor(temp));
+  };
+
+  const handleRegisterSubmit = async (values, { setSubmitting, setErrors }, navigate) => {
+    try {
+      const { firstname, lastname, email, company, password } = values;
+
+      // Call the API function for registration
+      await registerUser(firstname, lastname, email, company, password);
+
+      // Redirect to the login page after successful registration
+      navigate('/login');
+    } catch (error) {
+      // Handle API errors and set them in the form
+      setErrors({ submit: error.response?.data?.message || 'Registration failed' });
+    } finally {
+      setSubmitting(false); // Stop loading state
+    }
   };
 
   useEffect(() => {
@@ -66,6 +85,7 @@ export default function AuthRegister() {
           email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
           password: Yup.string().max(255).required('Password is required')
         })}
+        onSubmit={(values, formikHelpers) => handleRegisterSubmit(values, formikHelpers, navigate)}
       >
         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
           <form noValidate onSubmit={handleSubmit}>

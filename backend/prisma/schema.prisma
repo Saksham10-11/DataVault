@@ -9,9 +9,12 @@ generator client {
 
 model User {
   id     String @id @default(uuid())
-  userId String @unique
-  name   String
+  firstName   String
+  lastName   String
   email  String @unique
+  company String?
+  passwordHash String
+  salt String
   form   Form[]
   formresponse FormResponse[]
 }
@@ -21,7 +24,7 @@ model Form {
   title       String
   description String?
   createdAt   DateTime       @default(now())
-  user        User           @relation(fields: [createdBy], references: [userId])
+  user        User           @relation(fields: [createdBy], references: [id])
   createdBy   String
   fields      FormField[]
   responses   FormResponse[]
@@ -44,7 +47,7 @@ model FormResponse {
   form           Form            @relation(fields: [formId], references: [id])
   formId         String
   submittedAt    DateTime        @default(now())
-  user        User           @relation(fields: [submittedBy], references: [userId])
+  user        User           @relation(fields: [submittedBy], references: [id])
   submittedBy   String
   responseValues ResponseValue[]
 }

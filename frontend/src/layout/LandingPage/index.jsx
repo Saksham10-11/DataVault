@@ -20,6 +20,9 @@ import Footer from 'components/Home/Footer';
 import getLPTheme from 'themes/getLPTheme';
 import ThemeCustomization from 'themes/index';
 
+import { useEffect } from 'react';
+import checkAuth from 'api/Authentication/checkAuthentication';
+
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
     <Box
@@ -67,6 +70,19 @@ export default function LandingPage() {
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
   const defaultTheme = createTheme({ palette: { mode } });
+
+  useEffect(() => {
+    const verifyAuth = async () => {
+      try {
+        const authStatus = await checkAuth();
+        console.log('The auth status is : ');
+        console.log(authStatus);
+      } catch (err) {
+        console.error('Error checking authentication:', err);
+      }
+    };
+    verifyAuth();
+  }, []);
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));

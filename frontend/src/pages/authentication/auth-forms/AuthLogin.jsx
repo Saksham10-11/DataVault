@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import loginUser from 'api/Authentication/loginUser.js';
 
 // material-ui
 import Button from '@mui/material/Button';
@@ -33,14 +34,30 @@ import FirebaseSocial from './FirebaseSocial';
 
 export default function AuthLogin({ isDemo = false }) {
   const [checked, setChecked] = React.useState(false);
-
   const [showPassword, setShowPassword] = React.useState(false);
+  const navigate = useNavigate(); // For navigation after login
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
+  };
+
+  const handleFormSubmit = async (values, { setSubmitting, setErrors }) => {
+    try {
+      const { email, password } = values;
+      // Call the API function for login
+      await loginUser(email, password);
+
+      // Redirect to dashboard or any protected page after login
+      navigate('/');
+    } catch (error) {
+      // Handle errors returned from the API
+      setErrors({ submit: error.response?.data?.message || 'Login failed' });
+    } finally {
+      setSubmitting(false); // Stop the loading state
+    }
   };
 
   return (
@@ -55,6 +72,7 @@ export default function AuthLogin({ isDemo = false }) {
           email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
           password: Yup.string().max(255).required('Password is required')
         })}
+        onSubmit={handleFormSubmit}
       >
         {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
           <form noValidate onSubmit={handleSubmit}>

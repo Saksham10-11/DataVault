@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-// project import
+// // project import
 import MainRoutes from './MainRoutes';
 import LoginRoutes from './LoginRoutes';
 import LandingPageRoutes from './LandingPageRoutes';
