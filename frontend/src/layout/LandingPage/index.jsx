@@ -12,16 +12,11 @@ import AppAppBar from 'components/Home/AppAppBar';
 import Hero from 'components/Home/Hero';
 import LogoCollection from 'components/Home/LogoCollection';
 import Highlights from 'components/Home/Highlights';
-import Pricing from 'components/Home/Pricing';
 import Features from 'components/Home/Features';
 import Testimonials from 'components/Home/Testimonials';
 import FAQ from 'components/Home/FAQ';
 import Footer from 'components/Home/Footer';
 import getLPTheme from 'themes/getLPTheme';
-import ThemeCustomization from 'themes/index';
-
-import { useEffect } from 'react';
-import checkAuth from 'api/Authentication/checkAuthentication';
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   return (
@@ -67,34 +62,14 @@ ToggleCustomTheme.propTypes = {
 
 export default function LandingPage() {
   const [mode, setMode] = React.useState('light');
-  const [showCustomTheme, setShowCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
-  const defaultTheme = createTheme({ palette: { mode } });
-
-  useEffect(() => {
-    const verifyAuth = async () => {
-      try {
-        const authStatus = await checkAuth();
-        console.log('The auth status is : ');
-        console.log(authStatus);
-      } catch (err) {
-        console.error('Error checking authentication:', err);
-      }
-    };
-    verifyAuth();
-  }, []);
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const toggleCustomTheme = () => {
-    setShowCustomTheme((prev) => !prev);
-  };
-
   return (
-    <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
-      {/* <ThemeCustomization> */}
+    <ThemeProvider theme={LPtheme}>
       <CssBaseline />
       <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
       <Hero />
@@ -106,14 +81,10 @@ export default function LandingPage() {
         <Divider />
         <Highlights />
         <Divider />
-        <Pricing />
-        <Divider />
         <FAQ />
         <Divider />
         <Footer />
       </Box>
-      <ToggleCustomTheme showCustomTheme={showCustomTheme} toggleCustomTheme={toggleCustomTheme} />
-      {/* </ThemeCustomization> */}
     </ThemeProvider>
   );
 }

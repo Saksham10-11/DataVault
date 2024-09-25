@@ -1,54 +1,48 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import AutoFixHighRoundedIcon from "@mui/icons-material/AutoFixHighRounded";
-import ConstructionRoundedIcon from "@mui/icons-material/ConstructionRounded";
-import QueryStatsRoundedIcon from "@mui/icons-material/QueryStatsRounded";
-import SettingsSuggestRoundedIcon from "@mui/icons-material/SettingsSuggestRounded";
-import SupportAgentRoundedIcon from "@mui/icons-material/SupportAgentRounded";
-import ThumbUpAltRoundedIcon from "@mui/icons-material/ThumbUpAltRounded";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import SettingsSuggestRoundedIcon from '@mui/icons-material/SettingsSuggestRounded';
+import AttachMoneyRoundedIcon from '@mui/icons-material/AttachMoneyRounded';
+import InsightsRoundedIcon from '@mui/icons-material/InsightsRounded';
+import AutoFixHighRoundedIcon from '@mui/icons-material/AutoFixHighRounded';
+import SupportAgentRoundedIcon from '@mui/icons-material/SupportAgentRounded';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 
 const items = [
   {
     icon: <SettingsSuggestRoundedIcon />,
-    title: "Adaptable performance",
-    description:
-      "Our product effortlessly adjusts to your needs, boosting efficiency and simplifying your tasks.",
+    title: 'AI-Powered Form Creation',
+    description: 'Utilize advanced AI technology for seamless and intuitive form creation tailored to your specific needs.'
   },
   {
-    icon: <ConstructionRoundedIcon />,
-    title: "Built to last",
-    description:
-      "Experience unmatched durability that goes above and beyond with lasting investment.",
+    icon: <AttachMoneyRoundedIcon />,
+    title: 'Token-Based Reward System',
+    description: 'Engage users effectively with a rewarding system that incentivizes form creation and completion.'
   },
   {
-    icon: <ThumbUpAltRoundedIcon />,
-    title: "Great user experience",
-    description:
-      "Integrate our product into your routine with an intuitive and easy-to-use interface.",
+    icon: <InsightsRoundedIcon />,
+    title: 'Data Visualization Tools',
+    description: 'Gain valuable insights quickly with integrated visualization features that simplify data analysis.'
   },
   {
     icon: <AutoFixHighRoundedIcon />,
-    title: "Innovative functionality",
-    description:
-      "Stay ahead with features that set new standards, addressing your evolving needs better than the rest.",
+    title: 'Innovative Functionality',
+    description: 'Stay ahead with cutting-edge features that continuously adapt to meet your evolving data collection needs.'
   },
   {
     icon: <SupportAgentRoundedIcon />,
-    title: "Reliable support",
-    description:
-      "Count on our responsive customer support, offering assistance that goes beyond the purchase.",
+    title: 'Dedicated Customer Support',
+    description: 'Receive expert assistance whenever needed, ensuring a smooth experience throughout your journey with us.'
   },
   {
-    icon: <QueryStatsRoundedIcon />,
-    title: "Precision in every detail",
-    description:
-      "Enjoy a meticulously crafted product where small touches make a significant impact on your overall experience.",
-  },
+    icon: <CheckCircleRoundedIcon />,
+    title: 'Robust Performance',
+    description: 'Enjoy a reliable platform designed for durability, ensuring a smooth experience even under high usage.'
+  }
 ];
 
 export default function Highlights() {
@@ -58,31 +52,30 @@ export default function Highlights() {
       sx={{
         pt: { xs: 4, sm: 12 },
         pb: { xs: 8, sm: 16 },
-        color: "white",
-        bgcolor: "#06090a",
+        color: 'white',
+        bgcolor: '#06090a'
       }}
     >
       <Container
         sx={{
-          position: "relative",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: { xs: 3, sm: 6 },
+          position: 'relative',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: { xs: 3, sm: 6 }
         }}
       >
         <Box
           sx={{
-            width: { sm: "100%", md: "60%" },
-            textAlign: { sm: "left", md: "center" },
+            width: { sm: '100%', md: '60%' },
+            textAlign: { sm: 'left', md: 'center' }
           }}
         >
           <Typography component="h2" variant="h4">
             Highlights
           </Typography>
-          <Typography variant="body1" sx={{ color: "grey.400" }}>
-            Explore why our product stands out: adaptability, durability,
-            user-friendly design, and innovation. Enjoy reliable customer
+          <Typography variant="body1" sx={{ color: 'grey.400' }}>
+            Explore why our product stands out: adaptability, durability, user-friendly design, and innovation. Enjoy reliable customer
             support and precision in every detail.
           </Typography>
         </Box>
@@ -97,19 +90,19 @@ export default function Highlights() {
                 useFlexGap
                 sx={{
                   p: 3,
-                  height: "100%",
-                  border: "1px solid",
-                  borderColor: "grey.800",
-                  background: "transparent",
-                  backgroundColor: "grey.900",
+                  height: '100%',
+                  border: '1px solid',
+                  borderColor: 'grey.800',
+                  background: 'transparent',
+                  backgroundColor: 'grey.900'
                 }}
               >
-                <Box sx={{ opacity: "50%" }}>{item.icon}</Box>
+                <Box sx={{ opacity: '50%' }}>{item.icon}</Box>
                 <div>
                   <Typography fontWeight="medium" gutterBottom>
                     {item.title}
                   </Typography>
-                  <Typography variant="body2" sx={{ color: "grey.400" }}>
+                  <Typography variant="body2" sx={{ color: 'grey.400' }}>
                     {item.description}
                   </Typography>
                 </div>
