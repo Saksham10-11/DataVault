@@ -8,14 +8,14 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
-import AppAppBar from 'components/Home/AppAppBar';
-import Hero from 'components/Home/Hero';
-import LogoCollection from 'components/Home/LogoCollection';
-import Highlights from 'components/Home/Highlights';
-import Features from 'components/Home/Features';
-import Testimonials from 'components/Home/Testimonials';
-import FAQ from 'components/Home/FAQ';
-import Footer from 'components/Home/Footer';
+import AppAppBar from 'components/LandingPage/AppAppBar';
+import Hero from 'components/LandingPage/Hero';
+import LogoCollection from 'components/LandingPage/LogoCollection';
+import Highlights from 'components/LandingPage/Highlights';
+import Features from 'components/LandingPage/Features';
+import Testimonials from 'components/LandingPage/Testimonials';
+import FAQ from 'components/LandingPage/FAQ';
+import Footer from 'components/LandingPage/Footer';
 import getLPTheme from 'themes/getLPTheme';
 
 function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {

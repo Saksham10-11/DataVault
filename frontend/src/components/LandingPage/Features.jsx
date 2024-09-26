@@ -12,6 +12,7 @@ import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import DescriptionIcon from '@mui/icons-material/Description';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import BarChartIcon from '@mui/icons-material/BarChart';
+import AiPowered from 'assets/images/Ai_powered.jpg';
 
 const items = [
   {
@@ -19,8 +20,8 @@ const items = [
     title: 'AI-Powered Form Creation',
     description:
       'Effortlessly create custom forms with our intuitive AI interface, offering tailored suggestions for questions and layouts.',
-    imageLight: 'url("/static/images/templates/templates-images/dash-light.png")',
-    imageDark: 'url("/static/images/templates/templates-images/dash-dark.png")'
+    imageLight: `url(${AiPowered})`,
+    imageDark: `url(${AiPowered})`
   },
   {
     icon: <MonetizationOnIcon />,
