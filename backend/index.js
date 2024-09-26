@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import { genAIRouter, authRouter } from "./routes/index.js";
+import { genAIRouter, authRouter, formsRouter } from "./routes/index.js";
 import cors from "cors";
 
 dotenv.config();
@@ -29,6 +29,7 @@ app.use(cookieParser());
 
 app.use("/genai", genAIRouter);
 app.use("/auth", authRouter);
+app.use("/forms", formsRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on PORT ${PORT} ...`);

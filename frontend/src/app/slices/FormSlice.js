@@ -39,7 +39,6 @@ const formSlice = createSlice({
     },
     duplicateElement: (state, action) => {
       const { elId, elType } = action.payload;
-      console.log(elId);
       const elIdx = state.data.findIndex((el) => el.id === elId);
       if (elIdx !== -1) {
         const newElement = {
@@ -102,14 +101,9 @@ const formSlice = createSlice({
     },
     handleOptionValues: (state, action) => {
       const { elId, optionId, optionVal } = action.payload;
-      console.log(elId);
-      console.log(optionId);
-      console.log(optionVal);
       const element = state.data.find((el) => el.id === elId);
       if (element && element.options) {
-        console.log(element.options[0]);
         const reqOption = element.options.find((el) => el.id === optionId);
-        console.log(reqOption.value);
         reqOption.value = optionVal;
       }
     },

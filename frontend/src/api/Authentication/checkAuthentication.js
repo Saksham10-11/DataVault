@@ -4,7 +4,6 @@ import axios from 'axios';
 const url = import.meta.env.VITE_BACKEND_URL + 'auth/check'; // Ensure the correct endpoint is used
 
 const checkAuth = async () => {
-  return true;
   try {
     const response = await axios.get(url, {
       withCredentials: true, // Important for sending cookies/session

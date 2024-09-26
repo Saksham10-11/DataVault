@@ -8,6 +8,7 @@ import ProtectedRoute from './ProtectedRoutes';
 const Color = Loadable(lazy(() => import('pages/component-overview/color')));
 const Typography = Loadable(lazy(() => import('pages/component-overview/typography')));
 const FormBuilder = Loadable(lazy(() => import('pages/component-overview/formBuilder')));
+const Home = Loadable(lazy(() => import('pages/component-overview/Home')));
 const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
 
@@ -26,20 +27,15 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <DashboardDefault />
+      element: <Home />
+    },
+    {
+      path: '/dashboard/default',
+      element: <Home />
     },
     {
       path: '/color',
       element: <Color />
-    },
-    {
-      path: '/dashboard',
-      children: [
-        {
-          path: 'default',
-          element: <DashboardDefault />
-        }
-      ]
     },
     {
       path: '/sample-page',

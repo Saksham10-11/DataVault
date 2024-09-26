@@ -11,8 +11,6 @@ const sendMessage = async (message) => {
     });
     const jsonString = response.data.response.candidates[0].content.parts[0].text;
     const parsedData = JSON.parse(jsonString);
-    console.log(parsedData);
-    console.log(parsedData.form);
     return parsedData.form;
   } catch (error) {
     console.error('Error sending message:', error);

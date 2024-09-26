@@ -17,13 +17,15 @@ import { PromptDialog } from 'components/FormBuilder';
 import { updateData, setDescription, setTitle } from 'app/slices/FormSlice';
 
 //API's
-import { GenerateJSON } from 'api/FormBuilder';
+import { GenerateJSON, saveData } from 'api/FormBuilder';
 
 export default function Breadcrumbs({ navigation, title, ...others }) {
   const location = useLocation();
   const [main, setMain] = useState();
   const [item, setItem] = useState();
   const data = useSelector((state) => state.form.data);
+  const formTitle = useSelector((state) => state.form.title);
+  const formDescription = useSelector((state) => state.form.description);
   const [isDataEmpty, setIsDataEmpty] = useState(data.length === 0);
 
   useEffect(() => {
@@ -55,7 +57,17 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
   const dispatch = useDispatch();
 
   // Handle Button clicks
-  const handleSave = () => {};
+  const handleSave = () => {
+    const formData = {
+      title: formTitle,
+      description: formDescription,
+      data: data
+    };
+    saveData(formData);
+    dispatch(updateData([]));
+    dispatch(setTitle('Untitled Form'));
+    dispatch(setDescription(''));
+  };
 
   const handleGenerate = () => {
     setOpen(true);
